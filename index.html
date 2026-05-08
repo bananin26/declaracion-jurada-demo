@@ -2,15 +2,14 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=1440, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Declaración Jurada</title>
 
 <style>
 
 /* =====================================================
-   POWER APPS / SAP FIORI STYLE
-   RESOLUTION: 1440 x 900
+   VARIABLES
 ===================================================== */
 
 :root{
@@ -28,26 +27,40 @@
   box-sizing:border-box;
 }
 
-html,
+/* =====================================================
+   BODY CENTRADO
+===================================================== */
+
 body{
-  width:100%;
-  height:100%;
-  overflow:hidden;
+
+  min-height:100vh;
+
+  display:flex;
+  justify-content:center;
+  align-items:center;
+
+  background:#ECECEC;
+
+  overflow:auto;
+
   font-family:Segoe UI,sans-serif;
+
+  padding:40px;
 }
 
 /* =====================================================
-   CANVAS SIZE
+   POWER APPS CANVAS
 ===================================================== */
 
 .app{
+
   width:1440px;
   height:900px;
 
-  margin:auto;
-
   position:relative;
   overflow:hidden;
+
+  border-radius:12px;
 
   background:
   radial-gradient(
@@ -69,6 +82,37 @@ body{
   );
 
   color:white;
+
+  box-shadow:
+  0 12px 40px rgba(0,0,0,.12);
+}
+
+/* =====================================================
+   GRID OVERLAY
+===================================================== */
+
+.safe-grid{
+
+  position:absolute;
+  inset:0;
+
+  pointer-events:none;
+
+  background-image:
+
+  linear-gradient(
+    rgba(255,255,255,.02) 1px,
+    transparent 1px
+  ),
+
+  linear-gradient(
+    90deg,
+    rgba(255,255,255,.02) 1px,
+    transparent 1px
+  );
+
+  background-size:
+  80px 80px;
 }
 
 /* =====================================================
@@ -76,6 +120,7 @@ body{
 ===================================================== */
 
 .content{
+
   width:100%;
   height:100%;
 
@@ -88,7 +133,7 @@ body{
 }
 
 /* =====================================================
-   LEFT
+   LEFT SIDE
 ===================================================== */
 
 .left{
@@ -96,31 +141,35 @@ body{
 }
 
 .logo{
-  font-size:32px;
+
+  font-size:34px;
   font-weight:800;
-  letter-spacing:.5px;
-  margin-bottom:50px;
+
+  margin-bottom:52px;
 }
 
 .title{
-  font-size:74px;
+
+  font-size:76px;
   font-weight:900;
-  line-height:1.04;
+
+  line-height:1.03;
 
   max-width:760px;
 
-  margin-bottom:35px;
+  margin-bottom:38px;
 }
 
 .description{
-  max-width:620px;
+
+  max-width:640px;
 
   color:var(--muted);
 
-  font-size:22px;
+  font-size:21px;
   line-height:1.8;
 
-  margin-bottom:45px;
+  margin-bottom:48px;
 }
 
 /* =====================================================
@@ -133,6 +182,7 @@ body{
 }
 
 .btn{
+
   height:58px;
 
   padding:
@@ -157,13 +207,16 @@ body{
 /* PRIMARY */
 
 .btn-primary{
+
   background:var(--primary-light);
+
   color:white;
 }
 
 /* SECONDARY */
 
 .btn-secondary{
+
   background:transparent;
 
   border:1px solid rgba(255,255,255,.18);
@@ -172,10 +225,11 @@ body{
 }
 
 /* =====================================================
-   RIGHT
+   RIGHT SIDE
 ===================================================== */
 
 .right{
+
   width:420px;
 
   display:flex;
@@ -211,6 +265,7 @@ body{
 }
 
 .info-card:hover{
+
   transform:translateY(-2px);
 
   background:
@@ -222,6 +277,7 @@ body{
 ===================================================== */
 
 .icon{
+
   width:58px;
   height:58px;
 
@@ -244,6 +300,7 @@ body{
 ===================================================== */
 
 .card-text h3{
+
   font-size:34px;
   font-weight:700;
 
@@ -251,6 +308,7 @@ body{
 }
 
 .card-text p{
+
   color:var(--muted);
 
   font-size:17px;
@@ -258,44 +316,17 @@ body{
 }
 
 /* =====================================================
-   POWER APPS SAFE AREA
-===================================================== */
-
-.safe-grid{
-  position:absolute;
-  inset:0;
-
-  pointer-events:none;
-
-  background-image:
-  linear-gradient(
-    rgba(255,255,255,.02) 1px,
-    transparent 1px
-  ),
-
-  linear-gradient(
-    90deg,
-    rgba(255,255,255,.02) 1px,
-    transparent 1px
-  );
-
-  background-size:
-  80px 80px;
-}
-
-/* =====================================================
-   RESPONSIVE SCALE
+   RESPONSIVE
 ===================================================== */
 
 @media(max-width:1500px){
 
   body{
-    overflow:auto;
-    background:#041B5E;
+    align-items:flex-start;
   }
 
   .app{
-    transform:scale(.85);
+    transform:scale(.82);
     transform-origin:top center;
   }
 
@@ -304,6 +335,10 @@ body{
 </style>
 </head>
 <body>
+
+<!-- =====================================================
+   APP
+===================================================== -->
 
 <div class="app">
 
