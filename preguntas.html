@@ -1,0 +1,1592 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+<title>AENZA Builder</title>
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+
+<style>
+
+:root{
+    --primary:#0066D9;
+    --primaryLight:#EAF4FF;
+    --bg:#EEF3F8;
+    --card:#FFFFFF;
+    --text:#0F172A;
+    --textLight:#64748B;
+    --border:#E2E8F0;
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Segoe UI',sans-serif;
+}
+
+html,
+body{
+    height:100%;
+}
+
+body{
+    background:#d9e0e8;
+
+    overflow:hidden;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    padding:10px;
+}
+
+/* =========================
+MAIN CONTAINER
+========================= */
+
+.main-wrapper{
+    width:1366px;
+    height:768px;
+
+    display:flex;
+    flex-direction:column;
+
+    border-radius:24px;
+
+    overflow:hidden;
+
+    box-shadow:0 20px 45px rgba(0,0,0,0.12);
+}
+
+/* =========================
+HEADER
+========================= */
+
+.header{
+    height:72px;
+
+    background:white;
+
+    border-bottom:1px solid var(--border);
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    padding:0 22px;
+
+    flex-shrink:0;
+}
+
+/* LEFT HEADER */
+
+.header-left{
+    display:flex;
+    align-items:center;
+    gap:16px;
+}
+
+.logo-btn{
+    display:flex;
+    align-items:center;
+    gap:12px;
+
+    background:none;
+    border:none;
+
+    cursor:pointer;
+}
+
+.logo-box{
+    width:46px;
+    height:46px;
+
+    border-radius:14px;
+
+    background:linear-gradient(
+        135deg,
+        #0066D9,
+        #4EA7FF
+    );
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    color:white;
+
+    font-size:18px;
+}
+
+.logo-text{
+    display:flex;
+    flex-direction:column;
+    align-items:flex-start;
+}
+
+.logo-text h1{
+    font-size:18px;
+    color:var(--text);
+}
+
+.logo-text p{
+    font-size:11px;
+    color:var(--textLight);
+}
+
+/* RIGHT HEADER */
+
+.header-right{
+    display:flex;
+    align-items:center;
+    gap:14px;
+}
+
+.breadcrumb{
+    font-size:13px;
+    color:var(--textLight);
+}
+
+.home-btn{
+    height:40px;
+    padding:0 16px;
+
+    border:none;
+    border-radius:12px;
+
+    background:var(--primaryLight);
+
+    color:var(--primary);
+
+    font-size:12px;
+    font-weight:700;
+
+    cursor:pointer;
+}
+
+/* =========================
+APP
+========================= */
+
+.app{
+    flex:1;
+
+    background:var(--bg);
+
+    display:grid;
+
+    grid-template-columns:
+        260px
+        1fr
+        360px;
+
+    overflow:hidden;
+}
+
+/* FIX */
+
+.left-panel,
+.center-panel,
+.right-panel{
+    min-height:0;
+}
+
+.app > *{
+    min-height:0;
+}
+
+/* =========================
+SCROLL
+========================= */
+
+.question-list,
+.center-panel,
+.editor-content{
+    overflow-y:auto !important;
+    overflow-x:hidden;
+
+    height:100%;
+    min-height:0;
+}
+
+.question-list::-webkit-scrollbar,
+.center-panel::-webkit-scrollbar,
+.editor-content::-webkit-scrollbar{
+    width:8px;
+}
+
+.question-list::-webkit-scrollbar-thumb,
+.center-panel::-webkit-scrollbar-thumb,
+.editor-content::-webkit-scrollbar-thumb{
+    background:#cbd5e1;
+    border-radius:999px;
+}
+
+/* =========================
+LEFT
+========================= */
+
+.left-panel{
+    background:white;
+    border-right:1px solid var(--border);
+
+    display:flex;
+    flex-direction:column;
+}
+
+.left-top{
+    height:70px;
+
+    border-bottom:1px solid var(--border);
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    padding:0 18px;
+
+    flex-shrink:0;
+}
+
+.left-title h2{
+    font-size:18px;
+}
+
+.left-title p{
+    font-size:11px;
+    color:var(--textLight);
+}
+
+.add-question-btn{
+    width:40px;
+    height:40px;
+
+    border:none;
+    border-radius:12px;
+
+    background:var(--primary);
+
+    color:white;
+
+    cursor:pointer;
+}
+
+.question-list{
+    flex:1;
+    padding:14px;
+}
+
+.question-item{
+    background:#F8FAFC;
+
+    border:1px solid var(--border);
+
+    border-radius:16px;
+
+    padding:12px;
+
+    margin-bottom:10px;
+
+    cursor:pointer;
+
+    transition:0.2s;
+}
+
+.question-item.active{
+    background:var(--primaryLight);
+    border-color:#b9d9ff;
+}
+
+.question-number{
+    font-size:11px;
+    font-weight:700;
+
+    color:var(--primary);
+
+    margin-bottom:5px;
+}
+
+.question-text{
+    font-size:13px;
+    line-height:1.5;
+}
+
+.order-buttons{
+    margin-top:10px;
+
+    display:flex;
+    gap:6px;
+}
+
+.order-btn{
+    width:30px;
+    height:30px;
+
+    border:none;
+    border-radius:10px;
+
+    background:white;
+
+    border:1px solid var(--border);
+
+    cursor:pointer;
+
+    color:#475569;
+}
+
+/* =========================
+CENTER
+========================= */
+
+.center-panel{
+    padding:16px;
+}
+
+/* PREVIEW */
+
+.preview-card{
+    background:white;
+
+    border-radius:22px;
+
+    border:1px solid var(--border);
+
+    overflow:hidden;
+
+    min-height:100%;
+}
+
+.preview-header{
+    padding:18px;
+
+    border-bottom:1px solid var(--border);
+
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+}
+
+.preview-left{
+    display:flex;
+    gap:14px;
+}
+
+.preview-icon{
+    width:58px;
+    height:58px;
+
+    border-radius:18px;
+
+    background:linear-gradient(
+        135deg,
+        #0066D9,
+        #4EA7FF
+    );
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    color:white;
+
+    font-size:22px;
+}
+
+.preview-title h1{
+    font-size:24px;
+    margin-bottom:6px;
+}
+
+.preview-title p{
+    max-width:520px;
+
+    line-height:1.7;
+
+    color:var(--textLight);
+
+    font-size:13px;
+}
+
+.preview-status{
+    height:34px;
+    padding:0 12px;
+
+    border-radius:999px;
+
+    background:var(--primaryLight);
+
+    color:var(--primary);
+
+    display:flex;
+    align-items:center;
+
+    font-size:11px;
+    font-weight:700;
+}
+
+.preview-body{
+    padding:18px;
+}
+
+.preview-section{
+    margin-bottom:22px;
+}
+
+.section-title{
+    font-size:14px;
+    font-weight:700;
+
+    margin-bottom:12px;
+}
+
+/* OPTIONS */
+
+.options{
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+}
+
+.option{
+    min-width:110px;
+    height:46px;
+
+    padding:0 14px;
+
+    border-radius:14px;
+
+    background:#F8FAFC;
+
+    border:1px solid var(--border);
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+
+    font-size:13px;
+    font-weight:700;
+}
+
+/* TABS */
+
+.tabs{
+    display:flex;
+    gap:8px;
+    flex-wrap:wrap;
+}
+
+.tab{
+    height:36px;
+    padding:0 14px;
+
+    border:none;
+    border-radius:12px;
+
+    background:#F1F5F9;
+
+    font-size:12px;
+    font-weight:700;
+}
+
+.tab.active{
+    background:var(--primary);
+    color:white;
+}
+
+/* FIELDS */
+
+.fields{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:12px;
+}
+
+.field-card{
+    min-height:54px;
+
+    border-radius:14px;
+
+    background:#F8FAFC;
+
+    border:1px solid var(--border);
+
+    display:flex;
+    align-items:center;
+
+    padding:12px 14px;
+
+    gap:8px;
+
+    font-size:13px;
+    font-weight:600;
+}
+
+/* =========================
+RIGHT
+========================= */
+
+.right-panel{
+    background:white;
+
+    border-left:1px solid var(--border);
+
+    display:flex;
+    flex-direction:column;
+}
+
+.editor-header{
+    height:70px;
+
+    border-bottom:1px solid var(--border);
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    padding:0 18px;
+
+    flex-shrink:0;
+}
+
+.editor-header h2{
+    font-size:18px;
+}
+
+.save-btn{
+    height:40px;
+    padding:0 16px;
+
+    border:none;
+    border-radius:12px;
+
+    background:var(--primary);
+
+    color:white;
+
+    font-size:12px;
+    font-weight:700;
+
+    cursor:pointer;
+}
+
+.editor-content{
+    flex:1;
+    padding:16px;
+}
+
+/* FORM */
+
+.form-group{
+    margin-bottom:18px;
+}
+
+.form-group label{
+    display:block;
+
+    margin-bottom:8px;
+
+    font-size:13px;
+    font-weight:700;
+}
+
+.form-group textarea,
+.form-group input,
+.form-group select{
+    width:100%;
+
+    border:1px solid var(--border);
+
+    border-radius:14px;
+
+    background:#F8FAFC;
+
+    padding:12px;
+
+    font-size:13px;
+}
+
+.form-group textarea{
+    min-height:90px;
+
+    resize:none;
+}
+
+/* DYNAMIC */
+
+.dynamic-item{
+    background:#F8FAFC;
+
+    border:1px solid var(--border);
+
+    border-radius:14px;
+
+    padding:12px;
+
+    margin-bottom:10px;
+}
+
+.dynamic-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    margin-bottom:8px;
+}
+
+.remove-btn{
+    width:30px;
+    height:30px;
+
+    border:none;
+    border-radius:10px;
+
+    background:#ffecec;
+
+    color:#d63031;
+
+    cursor:pointer;
+}
+
+.add-btn{
+    width:100%;
+    height:44px;
+
+    border:none;
+    border-radius:14px;
+
+    background:var(--primaryLight);
+
+    color:var(--primary);
+
+    font-size:13px;
+    font-weight:700;
+
+    cursor:pointer;
+
+    margin-top:6px;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="main-wrapper">
+
+    <!-- HEADER -->
+
+    <header class="header">
+
+        <div class="header-left">
+
+            <button
+                class="logo-btn"
+                onclick="goHome()"
+            >
+
+                <div class="logo-box">
+                    <i class="fas fa-building"></i>
+                </div>
+
+                <div class="logo-text">
+
+                    <h1>AENZA</h1>
+
+                    <p>
+                        Builder de Preguntas
+                    </p>
+
+                </div>
+
+            </button>
+
+        </div>
+
+        <div class="header-right">
+
+            <div class="breadcrumb">
+                Inicio / Administración / Builder
+            </div>
+
+            <button
+                class="home-btn"
+                onclick="goHome()"
+            >
+                ← Volver al inicio
+            </button>
+
+        </div>
+
+    </header>
+
+    <!-- APP -->
+
+    <div class="app">
+
+        <!-- LEFT -->
+
+        <aside class="left-panel">
+
+            <div class="left-top">
+
+                <div class="left-title">
+
+                    <h2>Preguntas</h2>
+
+                    <p id="questionCounter">
+                        11 configuradas
+                    </p>
+
+                </div>
+
+                <button
+                    class="add-question-btn"
+                    onclick="addQuestion()"
+                >
+                    <i class="fas fa-plus"></i>
+                </button>
+
+            </div>
+
+            <div
+                class="question-list"
+                id="questionList"
+            ></div>
+
+        </aside>
+
+        <!-- CENTER -->
+
+        <main class="center-panel">
+
+            <div class="preview-card">
+
+                <div class="preview-header">
+
+                    <div class="preview-left">
+
+                        <div class="preview-icon">
+                            <i class="fas fa-circle-question"></i>
+                        </div>
+
+                        <div class="preview-title">
+
+                            <h1 id="previewTitle"></h1>
+
+                            <p id="previewDescription"></p>
+
+                        </div>
+
+                    </div>
+
+                    <div class="preview-status">
+                        Activa
+                    </div>
+
+                </div>
+
+                <div class="preview-body">
+
+                    <!-- OPTIONS -->
+
+                    <div class="preview-section">
+
+                        <div class="section-title">
+                            Opciones
+                        </div>
+
+                        <div
+                            class="options"
+                            id="previewOptions"
+                        ></div>
+
+                    </div>
+
+                    <!-- TABS -->
+
+                    <div class="preview-section">
+
+                        <div class="section-title">
+                            Subpreguntas
+                        </div>
+
+                        <div
+                            class="tabs"
+                            id="previewTabs"
+                        ></div>
+
+                    </div>
+
+                    <!-- FIELDS -->
+
+                    <div class="preview-section">
+
+                        <div class="section-title">
+                            Campos
+                        </div>
+
+                        <div
+                            class="fields"
+                            id="previewFields"
+                        ></div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </main>
+
+        <!-- RIGHT -->
+
+        <aside class="right-panel">
+
+            <div class="editor-header">
+
+                <h2>Editor</h2>
+
+                <button
+                    class="save-btn"
+                    onclick="saveChanges()"
+                >
+                    Guardar
+                </button>
+
+            </div>
+
+            <div class="editor-content">
+
+                <!-- QUESTION -->
+
+                <div class="form-group">
+
+                    <label>
+                        Pregunta
+                    </label>
+
+                    <textarea
+                        id="questionInput"
+                    ></textarea>
+
+                </div>
+
+                <!-- DESCRIPTION -->
+
+                <div class="form-group">
+
+                    <label>
+                        Descripción
+                    </label>
+
+                    <textarea
+                        id="descriptionInput"
+                    ></textarea>
+
+                </div>
+
+                <!-- OPTIONS -->
+
+                <div class="form-group">
+
+                    <label>
+                        Opciones
+                    </label>
+
+                    <div
+                        id="optionsContainer"
+                    ></div>
+
+                    <button
+                        class="add-btn"
+                        onclick="addOption()"
+                    >
+                        + Agregar opción
+                    </button>
+
+                </div>
+
+                <!-- TABS -->
+
+                <div class="form-group">
+
+                    <label>
+                        Subpreguntas
+                    </label>
+
+                    <div
+                        id="tabsContainer"
+                    ></div>
+
+                    <button
+                        class="add-btn"
+                        onclick="addTab()"
+                    >
+                        + Agregar subpregunta
+                    </button>
+
+                </div>
+
+                <!-- FIELDS -->
+
+                <div class="form-group">
+
+                    <label>
+                        Campos
+                    </label>
+
+                    <div
+                        id="fieldsContainer"
+                    ></div>
+
+                    <button
+                        class="add-btn"
+                        onclick="addField()"
+                    >
+                        + Agregar campo
+                    </button>
+
+                </div>
+
+            </div>
+
+        </aside>
+
+    </div>
+
+</div>
+
+<script>
+
+const questions = [];
+
+for(let i=1;i<=11;i++){
+
+    questions.push({
+
+        id:i,
+
+        title:`Pregunta ${i}`,
+
+        description:`Contenido editable de la pregunta ${i}.`,
+
+        options:["SI","NO"],
+
+        tabs:[
+            "Familiar 1",
+            "Familiar 2"
+        ],
+
+        fields:[
+            {
+                label:"Nombre completo",
+                type:"text"
+            },
+            {
+                label:"Empresa",
+                type:"text"
+            },
+            {
+                label:"Cargo",
+                type:"text"
+            }
+        ]
+    });
+}
+
+let currentQuestion = 0;
+
+/* =========================
+HOME
+========================= */
+
+function goHome(){
+
+    alert('Aquí puedes conectar la pantalla Home');
+
+    /*
+    EJEMPLO:
+
+    window.location.href='home.html';
+
+    O:
+
+    showScreen("home");
+    */
+}
+
+/* =========================
+RENDER LEFT
+========================= */
+
+function renderQuestionList(){
+
+    const list =
+        document.getElementById(
+            'questionList'
+        );
+
+    list.innerHTML='';
+
+    questions.forEach((q,index)=>{
+
+        list.innerHTML += `
+
+            <div
+                class="question-item ${index===currentQuestion?'active':''}"
+                onclick="selectQuestion(${index})"
+            >
+
+                <div class="question-number">
+
+                    Pregunta ${q.id}
+
+                </div>
+
+                <div class="question-text">
+
+                    ${q.title}
+
+                </div>
+
+                <div class="order-buttons">
+
+                    <button
+                        class="order-btn"
+                        onclick="event.stopPropagation(); moveQuestionUp(${index})"
+                    >
+                        <i class="fas fa-arrow-up"></i>
+                    </button>
+
+                    <button
+                        class="order-btn"
+                        onclick="event.stopPropagation(); moveQuestionDown(${index})"
+                    >
+                        <i class="fas fa-arrow-down"></i>
+                    </button>
+
+                </div>
+
+            </div>
+
+        `;
+    });
+
+    document.getElementById(
+        'questionCounter'
+    ).innerText =
+        `${questions.length} configuradas`;
+}
+
+/* =========================
+MOVE ORDER
+========================= */
+
+function moveQuestionUp(index){
+
+    if(index===0) return;
+
+    [questions[index-1], questions[index]] =
+    [questions[index], questions[index-1]];
+
+    currentQuestion = index-1;
+
+    renderQuestionList();
+
+    selectQuestion(currentQuestion);
+}
+
+function moveQuestionDown(index){
+
+    if(index===questions.length-1) return;
+
+    [questions[index+1], questions[index]] =
+    [questions[index], questions[index+1]];
+
+    currentQuestion = index+1;
+
+    renderQuestionList();
+
+    selectQuestion(currentQuestion);
+}
+
+/* =========================
+SELECT
+========================= */
+
+function selectQuestion(index){
+
+    currentQuestion = index;
+
+    const q = questions[index];
+
+    renderQuestionList();
+
+    document.getElementById(
+        'previewTitle'
+    ).innerText = q.title;
+
+    document.getElementById(
+        'previewDescription'
+    ).innerText = q.description;
+
+    /* OPTIONS */
+
+    const previewOptions =
+        document.getElementById(
+            'previewOptions'
+        );
+
+    previewOptions.innerHTML='';
+
+    q.options.forEach(option=>{
+
+        previewOptions.innerHTML += `
+
+            <div class="option">
+
+                <input type="radio">
+
+                ${option}
+
+            </div>
+
+        `;
+    });
+
+    /* TABS */
+
+    const previewTabs =
+        document.getElementById(
+            'previewTabs'
+        );
+
+    previewTabs.innerHTML='';
+
+    q.tabs.forEach((tab,index)=>{
+
+        previewTabs.innerHTML += `
+
+            <button class="tab ${index===0?'active':''}">
+
+                ${tab}
+
+            </button>
+
+        `;
+    });
+
+    /* FIELDS */
+
+    const previewFields =
+        document.getElementById(
+            'previewFields'
+        );
+
+    previewFields.innerHTML='';
+
+    q.fields.forEach(field=>{
+
+        previewFields.innerHTML += `
+
+            <div class="field-card">
+
+                <i class="fas fa-layer-group"></i>
+
+                ${field.label}
+
+                <span style="
+                    margin-left:auto;
+                    font-size:11px;
+                    color:#64748B;
+                ">
+
+                    ${field.type}
+
+                </span>
+
+            </div>
+
+        `;
+    });
+
+    document.getElementById(
+        'questionInput'
+    ).value = q.title;
+
+    document.getElementById(
+        'descriptionInput'
+    ).value = q.description;
+
+    renderOptions();
+
+    renderTabs();
+
+    renderFields();
+}
+
+/* =========================
+OPTIONS
+========================= */
+
+function renderOptions(){
+
+    const container =
+        document.getElementById(
+            'optionsContainer'
+        );
+
+    container.innerHTML='';
+
+    questions[currentQuestion]
+        .options
+        .forEach((option,index)=>{
+
+            container.innerHTML += `
+
+                <div class="dynamic-item">
+
+                    <div class="dynamic-top">
+
+                        <strong>
+                            Opción ${index+1}
+                        </strong>
+
+                        <button
+                            class="remove-btn"
+                            onclick="removeOption(${index})"
+                        >
+                            <i class="fas fa-trash"></i>
+                        </button>
+
+                    </div>
+
+                    <input
+                        type="text"
+                        value="${option}"
+                        onchange="updateOption(${index},this.value)"
+                    >
+
+                </div>
+
+            `;
+        });
+}
+
+function addOption(){
+
+    questions[currentQuestion]
+        .options
+        .push('Nueva opción');
+
+    renderOptions();
+
+    selectQuestion(currentQuestion);
+}
+
+function removeOption(index){
+
+    questions[currentQuestion]
+        .options
+        .splice(index,1);
+
+    renderOptions();
+
+    selectQuestion(currentQuestion);
+}
+
+function updateOption(index,value){
+
+    questions[currentQuestion]
+        .options[index] = value;
+
+    selectQuestion(currentQuestion);
+}
+
+/* =========================
+TABS
+========================= */
+
+function renderTabs(){
+
+    const container =
+        document.getElementById(
+            'tabsContainer'
+        );
+
+    container.innerHTML='';
+
+    questions[currentQuestion]
+        .tabs
+        .forEach((tab,index)=>{
+
+            container.innerHTML += `
+
+                <div class="dynamic-item">
+
+                    <div class="dynamic-top">
+
+                        <strong>
+                            Subpregunta ${index+1}
+                        </strong>
+
+                        <button
+                            class="remove-btn"
+                            onclick="removeTab(${index})"
+                        >
+
+                            <i class="fas fa-trash"></i>
+
+                        </button>
+
+                    </div>
+
+                    <input
+                        type="text"
+                        value="${tab}"
+                        onchange="updateTab(${index},this.value)"
+                    >
+
+                </div>
+
+            `;
+        });
+}
+
+function addTab(){
+
+    questions[currentQuestion]
+        .tabs
+        .push('Nueva subpregunta');
+
+    renderTabs();
+
+    selectQuestion(currentQuestion);
+}
+
+function removeTab(index){
+
+    questions[currentQuestion]
+        .tabs
+        .splice(index,1);
+
+    renderTabs();
+
+    selectQuestion(currentQuestion);
+}
+
+function updateTab(index,value){
+
+    questions[currentQuestion]
+        .tabs[index] = value;
+
+    selectQuestion(currentQuestion);
+}
+
+/* =========================
+FIELDS
+========================= */
+
+function renderFields(){
+
+    const container =
+        document.getElementById(
+            'fieldsContainer'
+        );
+
+    container.innerHTML='';
+
+    questions[currentQuestion]
+        .fields
+        .forEach((field,index)=>{
+
+            container.innerHTML += `
+
+                <div class="dynamic-item">
+
+                    <div class="dynamic-top">
+
+                        <strong>
+                            Campo ${index+1}
+                        </strong>
+
+                        <button
+                            class="remove-btn"
+                            onclick="removeField(${index})"
+                        >
+
+                            <i class="fas fa-trash"></i>
+
+                        </button>
+
+                    </div>
+
+                    <input
+                        type="text"
+                        value="${field.label}"
+                        onchange="updateFieldLabel(${index},this.value)"
+                        style="margin-bottom:10px;"
+                    >
+
+                    <select
+                        onchange="updateFieldType(${index},this.value)"
+                    >
+
+                        <option value="text"
+                        ${field.type==='text'?'selected':''}>
+                        Texto
+                        </option>
+
+                        <option value="textarea"
+                        ${field.type==='textarea'?'selected':''}>
+                        TextArea
+                        </option>
+
+                        <option value="number"
+                        ${field.type==='number'?'selected':''}>
+                        Número
+                        </option>
+
+                        <option value="date"
+                        ${field.type==='date'?'selected':''}>
+                        Fecha
+                        </option>
+
+                        <option value="select"
+                        ${field.type==='select'?'selected':''}>
+                        Select
+                        </option>
+
+                        <option value="checkbox"
+                        ${field.type==='checkbox'?'selected':''}>
+                        Checkbox
+                        </option>
+
+                        <option value="radio"
+                        ${field.type==='radio'?'selected':''}>
+                        Radio
+                        </option>
+
+                    </select>
+
+                </div>
+
+            `;
+        });
+}
+
+function addField(){
+
+    questions[currentQuestion]
+        .fields
+        .push({
+
+            label:'Nuevo campo',
+            type:'text'
+
+        });
+
+    renderFields();
+
+    selectQuestion(currentQuestion);
+}
+
+function removeField(index){
+
+    questions[currentQuestion]
+        .fields
+        .splice(index,1);
+
+    renderFields();
+
+    selectQuestion(currentQuestion);
+}
+
+function updateFieldLabel(index,value){
+
+    questions[currentQuestion]
+        .fields[index]
+        .label = value;
+
+    selectQuestion(currentQuestion);
+}
+
+function updateFieldType(index,value){
+
+    questions[currentQuestion]
+        .fields[index]
+        .type = value;
+
+    selectQuestion(currentQuestion);
+}
+
+/* =========================
+SAVE
+========================= */
+
+function saveChanges(){
+
+    questions[currentQuestion].title =
+        document.getElementById(
+            'questionInput'
+        ).value;
+
+    questions[currentQuestion].description =
+        document.getElementById(
+            'descriptionInput'
+        ).value;
+
+    selectQuestion(currentQuestion);
+
+    alert('Cambios guardados');
+}
+
+/* =========================
+ADD QUESTION
+========================= */
+
+function addQuestion(){
+
+    const id = questions.length + 1;
+
+    questions.push({
+
+        id:id,
+
+        title:`Pregunta ${id}`,
+
+        description:'Nueva pregunta',
+
+        options:['SI','NO'],
+
+        tabs:['Subpregunta 1'],
+
+        fields:[
+            {
+                label:'Campo 1',
+                type:'text'
+            }
+        ]
+
+    });
+
+    renderQuestionList();
+
+    selectQuestion(
+        questions.length-1
+    );
+}
+
+/* INIT */
+
+selectQuestion(0);
+
+</script>
+
+</body>
+</html>
