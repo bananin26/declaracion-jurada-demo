@@ -3,469 +3,2799 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AENZA - Portal de Cumplimiento</title>
 
-<title>Declaración Jurada</title>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 
 <style>
 
-/* =====================================================
-   VARIABLES
-===================================================== */
+/* =========================
+VARIABLES
+========================= */
 
 :root{
-  --primary:#062B78;
-  --primary-light:#2E6BFF;
-  --card:#17388F;
-  --card-border:rgba(255,255,255,.08);
-  --text:#FFFFFF;
-  --muted:rgba(255,255,255,.78);
+    --bg-app:#f4f7fa;
+    --primary:#0078d4;
+    --primary-hover:#005a9e;
+    --white:#ffffff;
+    --text-dark:#111827;
+    --text-gray:#6b7280;
+    --border:#e5e7eb;
+    --accent:#eff6ff;
 }
 
 *{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Segoe UI',sans-serif;
 }
-
-/* =====================================================
-   BODY CENTRADO
-===================================================== */
 
 body{
-
-  min-height:100vh;
-
-  display:flex;
-  justify-content:center;
-  align-items:center;
-
-  background:#ECECEC;
-
-  overflow:auto;
-
-  font-family:Segoe UI,sans-serif;
-
-  padding:40px;
+    background:#d1d5db;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    width:100vw;
+    height:100vh;
+    overflow:auto;
+    padding:30px;
 }
 
-/* =====================================================
-   POWER APPS CANVAS
-===================================================== */
+/* =========================
+APP
+========================= */
 
-.app{
-
-  width:1440px;
-  height:900px;
-
-  position:relative;
-  overflow:hidden;
-
-  border-radius:12px;
-
-  background:
-  radial-gradient(
-    circle at top right,
-    rgba(255,255,255,.05),
-    transparent 28%
-  ),
-
-  radial-gradient(
-    circle at bottom left,
-    rgba(255,255,255,.03),
-    transparent 30%
-  ),
-
-  linear-gradient(
-    135deg,
-    #041B5E,
-    #062B78
-  );
-
-  color:white;
-
-  box-shadow:
-  0 12px 40px rgba(0,0,0,.12);
+.app-canvas{
+    width:1280px;
+    height:760px;
+    background:var(--bg-app);
+    border-radius:22px;
+    overflow:hidden;
+    display:flex;
+    flex-direction:column;
+    box-shadow:0 25px 60px rgba(0,0,0,0.18);
 }
 
-/* =====================================================
-   GRID OVERLAY
-===================================================== */
+/* =========================
+LOGO CLICKABLE
+========================= */
 
-.safe-grid{
+.logo-text{
+    font-size:22px;
+    font-weight:800;
+    color:var(--primary);
+    letter-spacing:1px;
 
-  position:absolute;
-  inset:0;
+    display:flex;
+    align-items:center;
+    gap:10px;
 
-  pointer-events:none;
-
-  background-image:
-
-  linear-gradient(
-    rgba(255,255,255,.02) 1px,
-    transparent 1px
-  ),
-
-  linear-gradient(
-    90deg,
-    rgba(255,255,255,.02) 1px,
-    transparent 1px
-  );
-
-  background-size:
-  80px 80px;
+    cursor:pointer;
+    transition:0.2s;
 }
 
-/* =====================================================
-   CONTENT
-===================================================== */
-
-.content{
-
-  width:100%;
-  height:100%;
-
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-
-  padding:
-  0 120px;
+.logo-text:hover{
+    transform:translateY(-1px);
+    opacity:0.9;
 }
 
-/* =====================================================
-   LEFT SIDE
-===================================================== */
+/* =========================
+HEADER
+========================= */
 
-.left{
-  width:58%;
+header{
+    height:72px;
+    min-height:72px;
+    background:white;
+    border-bottom:1px solid var(--border);
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 34px;
 }
 
-.logo{
-
-  font-size:34px;
-  font-weight:800;
-
-  margin-bottom:52px;
+.logo-text{
+    font-size:20px;
+    font-weight:800;
+    color:var(--primary);
+    letter-spacing:1px;
 }
 
-.title{
-
-  font-size:76px;
-  font-weight:900;
-
-  line-height:1.03;
-
-  max-width:760px;
-
-  margin-bottom:38px;
+.user-info{
+    display:flex;
+    align-items:center;
+    gap:12px;
 }
 
-.description{
-
-  max-width:640px;
-
-  color:var(--muted);
-
-  font-size:21px;
-  line-height:1.8;
-
-  margin-bottom:48px;
+.user-name{
+    font-size:12px;
+    line-height:1.4;
+    text-align:right;
+    font-weight:700;
+    color:var(--text-dark);
 }
 
-/* =====================================================
-   BUTTONS
-===================================================== */
-
-.buttons{
-  display:flex;
-  gap:18px;
+.avatar{
+    width:40px;
+    height:40px;
+    border-radius:50%;
+    background:var(--accent);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:var(--primary);
+    border:1px solid var(--border);
 }
 
-.btn{
+/* =========================
+SCREENS
+========================= */
 
-  height:58px;
-
-  padding:
-  0 34px;
-
-  border-radius:14px;
-
-  border:none;
-
-  cursor:pointer;
-
-  font-size:17px;
-  font-weight:700;
-
-  transition:.25s;
+.screen{
+    flex:1;
+    display:none;
+    padding:28px 42px 20px;
+    overflow:hidden;
 }
 
-.btn:hover{
-  transform:translateY(-2px);
+.screen.active{
+    display:flex;
+    flex-direction:column;
 }
 
-/* PRIMARY */
+/* =========================
+HOME
+========================= */
 
-.btn-primary{
-
-  background:var(--primary-light);
-
-  color:white;
+.home-grid{
+    width:100%;
+    height:100%;
+    display:grid;
+    grid-template-columns:1.1fr 0.9fr;
+    gap:42px;
+    align-items:center;
 }
 
-/* SECONDARY */
-
-.btn-secondary{
-
-  background:transparent;
-
-  border:1px solid rgba(255,255,255,.18);
-
-  color:white;
+.home-title{
+    font-size:40px;
+    line-height:1.12;
+    color:var(--text-dark);
+    margin-bottom:20px;
 }
 
-/* =====================================================
-   RIGHT SIDE
-===================================================== */
-
-.right{
-
-  width:420px;
-
-  display:flex;
-  flex-direction:column;
-
-  gap:24px;
+.home-desc{
+    color:var(--text-gray);
+    font-size:15px;
+    line-height:1.7;
+    margin-bottom:30px;
+    max-width:520px;
 }
 
-/* =====================================================
-   CARDS
-===================================================== */
+.home-buttons{
+    display:flex;
+    gap:14px;
+    align-items:center;
+}
+
+/* =========================
+INFO CARDS
+========================= */
 
 .info-card{
-
-  min-height:132px;
-
-  border-radius:24px;
-
-  padding:28px;
-
-  background:
-  rgba(255,255,255,.06);
-
-  border:
-  1px solid var(--card-border);
-
-  backdrop-filter:blur(14px);
-
-  display:flex;
-  gap:22px;
-
-  transition:.25s;
+    background:white;
+    border-radius:16px;
+    padding:16px 18px;
+    display:flex;
+    align-items:center;
+    gap:16px;
+    margin-bottom:14px;
+    border:1px solid rgba(0,0,0,0.04);
+    box-shadow:0 4px 16px rgba(0,0,0,0.03);
 }
 
-.info-card:hover{
-
-  transform:translateY(-2px);
-
-  background:
-  rgba(255,255,255,.08);
+.icon-box{
+    width:48px;
+    height:48px;
+    border-radius:14px;
+    background:linear-gradient(135deg,#0078d4,#4da3ff);
+    color:white;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:18px;
+    flex-shrink:0;
 }
 
-/* =====================================================
-   ICON
-===================================================== */
-
-.icon{
-
-  width:58px;
-  height:58px;
-
-  border-radius:18px;
-
-  background:
-  rgba(255,255,255,.08);
-
-  display:flex;
-  align-items:center;
-  justify-content:center;
-
-  font-size:26px;
-
-  flex-shrink:0;
+.info-card h4{
+    font-size:14px;
+    margin-bottom:4px;
+    color:var(--text-dark);
 }
 
-/* =====================================================
-   CARD TEXT
-===================================================== */
-
-.card-text h3{
-
-  font-size:34px;
-  font-weight:700;
-
-  margin-bottom:10px;
+.info-card p{
+    font-size:12px;
+    color:var(--text-gray);
+    line-height:1.5;
 }
 
-.card-text p{
+/* =========================
+BUTTONS
+========================= */
 
-  color:var(--muted);
-
-  font-size:17px;
-  line-height:1.7;
+.btn{
+    height:46px;
+    padding:0 22px;
+    border:none;
+    border-radius:12px;
+    font-size:13px;
+    font-weight:700;
+    cursor:pointer;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:9px;
+    transition:0.2s;
+    white-space:nowrap;
 }
 
-/* =====================================================
-   RESPONSIVE
-===================================================== */
+.btn-next{
+    background:var(--primary);
+    color:white;
+    box-shadow:0 8px 18px rgba(0,120,212,0.16);
+}
 
-@media(max-width:1500px){
+.btn-next:hover:not(:disabled){
+    background:var(--primary-hover);
+    transform:translateY(-1px);
+}
 
-  body{
+.btn-next:disabled{
+    background:#d1d5db;
+    color:#9ca3af;
+    box-shadow:none;
+    cursor:not-allowed;
+}
+
+.btn-secondary{
+    background:white;
+    border:1px solid var(--border);
+    color:var(--text-dark);
+}
+
+/* =========================
+CARD
+========================= */
+
+.content-card{
+    width:100%;
+    max-width:1500px;
+    height:500px;
+    margin:auto;
+    background:white;
+    border-radius:24px;
+    padding:38px;
+    border:1px solid rgba(0,0,0,0.05);
+    box-shadow:0 8px 25px rgba(0,0,0,0.04);
+}
+
+/* =========================
+COMUNICADO
+========================= */
+
+.statement-header{
+    display:flex;
+    align-items:center;
+    gap:18px;
+    margin-bottom:24px;
+}
+
+.statement-icon{
+    width:54px;
+    height:54px;
+    border-radius:16px;
+    background:linear-gradient(135deg,#0078d4,#4da3ff);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:white;
+    font-size:21px;
+    flex-shrink:0;
+}
+
+.statement-title h2{
+    font-size:24px;
+    color:var(--text-dark);
+    margin-bottom:3px;
+}
+
+.statement-title p{
+    font-size:16px;
+    color:var(--text-gray);
+}
+
+.legal-box{
+    background:#f8fbff;
+    border:1px solid #dbeafe;
+    border-radius:18px;
+    padding:22px;
+}
+
+.legal-paragraph{
+    font-size:14.5px;
+    line-height:1.75;
+    color:var(--text-dark);
+}
+
+.legal-paragraph p{
+    margin-bottom:14px;
+}
+
+.legal-link{
+    color:var(--primary);
+    font-weight:700;
+    text-decoration:none;
+}
+
+.acceptance-box{
+    margin-top:18px;
+    display:flex;
+    gap:14px;
+    padding:18px;
+    border-radius:16px;
+    background:white;
+    border:1px solid #dbeafe;
+    cursor:pointer;
     align-items:flex-start;
-  }
+}
 
-  .app{
-    transform:scale(.82);
-    transform-origin:top center;
-  }
+.acceptance-box input{
+    width:18px;
+    height:18px;
+    margin-top:2px;
+    accent-color:var(--primary);
+    flex-shrink:0;
+}
 
+.acceptance-content{
+    font-size:14.5px;
+    line-height:1.6;
+    color:var(--text-dark);
+}
+
+/* =========================
+FORM
+========================= */
+
+.form-header{
+    display:flex;
+    align-items:center;
+    gap:18px;
+    margin-bottom:28px;
+}
+
+.form-icon{
+    width:54px;
+    height:54px;
+    border-radius:16px;
+    background:linear-gradient(135deg,#0078d4,#4da3ff);
+    color:white;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:21px;
+}
+
+.form-title h2{
+    font-size:26px;
+    color:var(--text-dark);
+}
+
+.form-title p{
+    font-size:14.5px;
+    color:var(--text-gray);
+}
+
+.form-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:18px;
+}
+
+.input-group.full{
+    grid-column:1 / -1;
+}
+
+.input-group label{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    margin-bottom:8px;
+    font-size:14.5px;
+    font-weight:700;
+    color:#1f2937;
+}
+
+.input-group label i{
+    color:var(--primary);
+}
+
+.input-ctrl{
+    width:100%;
+    height:46px;
+    padding:0 14px;
+    border-radius:12px;
+    border:1.5px solid #dbe3ec;
+    background:#f9fafb;
+    font-size:13px;
+    transition:0.2s;
+}
+
+.input-ctrl:focus{
+    outline:none;
+    border-color:var(--primary);
+    background:white;
+    box-shadow:0 0 0 4px rgba(0,120,212,0.08);
+}
+
+.option-card{
+    width:120px;
+    height:52px;
+    border-radius:16px;
+    border:1px solid #dbe5f0;
+    background:white;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:10px;
+    cursor:pointer;
+    font-size:14px;
+    font-weight:700;
+    transition:0.2s;
+}
+
+.option-card:hover{
+    border-color:var(--primary);
+    background:#f8fbff;
+}
+
+.option-card input{
+    accent-color:var(--primary);
+}
+
+/* =========================
+TABS ESTILO GOOGLE
+========================= */
+
+.family-tab{
+    height:40px;
+    padding:0 20px;
+
+    border:none;
+    border-radius:12px;
+
+    background:#e2e8f0;
+    color:#334155;
+
+    font-size:13px;
+    font-weight:700;
+
+    cursor:pointer;
+    transition:0.2s;
+}
+
+.family-tab:hover{
+    background:#dbeafe;
+}
+
+.active-family-tab{
+    background:var(--primary);
+    color:white;
+    box-shadow:0 8px 18px rgba(0,120,212,0.16);
+}
+
+/* QUESTION SCREEN */
+
+.panel{
+    background:white;
+    border:1px solid #dbe5f0;
+    border-radius:18px;
+    padding:14px 18px;
+    box-shadow:0 3px 10px rgba(0,0,0,0.03);
+}
+
+.top-header{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+}
+
+.panel-title{
+    font-size:14px;
+    font-weight:700;
+    color:#0f172a;
+}
+
+.status-badge{
+    height:32px;
+    padding:0 14px;
+    border-radius:999px;
+    background:#eef4ff;
+    color:#2563eb;
+    font-size:11px;
+    font-weight:700;
+    display:flex;
+    align-items:center;
+    gap:8px;
+}
+
+.step-grid{
+    display:grid;
+    grid-template-columns:repeat(11,1fr);
+    gap:8px;
+    margin-top:14px;
+}
+
+.step-btn{
+    height:36px;
+    border-radius:10px;
+    border:1px solid #dbe5f0;
+    background:white;
+    color:#64748b;
+    font-size:12px;
+    font-weight:700;
+}
+
+.active-step{
+    background:#eef4ff;
+    color:#2563eb;
+    border:2px solid #2563eb;
+}
+
+.completed-step{
+    background:#dcfce7;
+    color:#166534;
+    border:2px solid #22c55e;
+}
+
+.question-title{
+    font-size:15px;
+    font-weight:700;
+    color:#0f172a;
+    line-height:1.5;
+    margin-bottom:10px;
+}
+
+.question-description{
+    color:#64748b;
+    font-size:12px;
+    line-height:1.5;
+    margin-bottom:16px;
+}
+
+.options{
+    display:flex;
+    gap:10px;
+}
+
+.option-card{
+    width:92px;
+    height:42px;
+    border-radius:12px;
+    border:1.8px solid #dbe5f0;
+    background:white;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+    cursor:pointer;
+    font-size:12px;
+    font-weight:700;
+    color:#1e293b;
+}
+
+.family-section{
+    display:none;
+    background:white;
+    border:1px solid #dbe5f0;
+    border-radius:18px;
+    overflow:hidden;
+    flex:1;
+    flex-direction:column;
+}
+
+.family-top{
+    height:48px;
+    background:#f8fbff;
+    border-bottom:1px solid #e2e8f0;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 14px;
+}
+
+.family-tabs{
+    display:flex;
+    gap:8px;
+}
+
+.family-tab{
+    height:30px;
+    padding:0 14px;
+    border-radius:9px;
+    border:none;
+    background:#e2e8f0;
+    color:#475569;
+    font-size:11px;
+    font-weight:700;
+}
+
+.active-tab{
+    background:#0078d4;
+    color:white;
+}
+
+.save-btn{
+    height:30px;
+    padding:0 12px;
+    border:none;
+    border-radius:8px;
+    background:#0f172a;
+    color:white;
+    font-size:11px;
+    font-weight:700;
+}
+
+.family-form{
+    padding:16px;
+    display:grid;
+    grid-template-columns:1fr 1fr 1fr;
+    gap:14px;
+}
+
+.field-box label{
+    display:block;
+    margin-bottom:5px;
+    font-size:11px;
+    font-weight:700;
+}
+
+.field-box input{
+    width:100%;
+    height:38px;
+    border-radius:10px;
+    border:1px solid #dbe5f0;
+    padding:0 12px;
+}
+
+.navigation{
+    width:100%;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+}
+
+.nav-btn{
+    height:40px;
+    padding:0 20px;
+    border:none;
+    border-radius:12px;
+    font-size:13px;
+    font-weight:700;
+    display:flex;
+    align-items:center;
+    gap:8px;
+    cursor:pointer;
+}
+
+.nav-back{
+    background:#f1f5f9;
+    color:#334155;
+}
+
+.nav-next{
+    background:#0078d4;
+    color:white;
+}
+
+.page-indicator{
+    color:#64748b;
+    font-size:12px;
+    font-weight:600;
+}
+
+/* FOOTER */
+
+footer{
+    width:100%;
+    height:78px;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    padding:0 34px;
+
+    background:white;
+
+    border-top:1px solid var(--border);
+
+    margin-top:20px;
+}
+
+footer{
+    width:100%;
+    height:72px;
+    min-height:72px;
+    background:white;
+    border-top:1px solid var(--border);
+    display:flex;
+    justify-content:flex-end;
+    align-items:center;
+    padding:0 42px;
+    margin-top:18px;
+}
+
+/* =========================
+ADMIN
+========================= */
+
+.admin-wrapper{
+    width:100%;
+    height:100%;
+
+    display:flex;
+    flex-direction:column;
+}
+
+.admin-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+
+    margin-bottom:40px;
+}
+
+.admin-title{
+    font-size:52px;
+    color:#0f172a;
+
+    margin-bottom:8px;
+}
+
+.admin-subtitle{
+    color:#64748b;
+    font-size:16px;
+}
+
+.admin-home{
+    width:60px;
+    height:60px;
+
+    border:none;
+    border-radius:18px;
+
+    background:white;
+
+    color:var(--primary);
+
+    font-size:22px;
+
+    cursor:pointer;
+
+    box-shadow:0 8px 20px rgba(0,0,0,0.05);
+}
+
+.admin-grid{
+    flex:1;
+
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+
+    gap:26px;
+}
+
+.admin-card{
+    background:white;
+
+    border:1px solid #e2e8f0;
+
+    border-radius:30px;
+
+    padding:34px 28px;
+
+    display:flex;
+    flex-direction:column;
+
+    text-align:left;
+
+    cursor:pointer;
+
+    transition:0.25s;
+
+    position:relative;
+
+    overflow:hidden;
+}
+
+.admin-card:hover{
+    transform:translateY(-6px);
+
+    box-shadow:0 18px 35px rgba(0,0,0,0.08);
+}
+
+.admin-card::before{
+    content:'';
+
+    position:absolute;
+
+    width:220px;
+    height:220px;
+
+    border-radius:50%;
+
+    background:rgba(0,102,217,0.05);
+
+    top:-120px;
+    right:-80px;
+}
+
+.admin-icon{
+    width:84px;
+    height:84px;
+
+    border-radius:24px;
+
+    background:linear-gradient(
+        135deg,
+        #0066D9,
+        #4EA7FF
+    );
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    color:white;
+
+    font-size:34px;
+
+    margin-bottom:30px;
+
+    position:relative;
+    z-index:2;
+}
+
+.admin-card h2{
+    font-size:34px;
+    color:#0f172a;
+
+    margin-bottom:16px;
+
+    position:relative;
+    z-index:2;
+}
+
+.admin-card p{
+    color:#64748b;
+
+    line-height:1.9;
+    font-size:15px;
+
+    position:relative;
+    z-index:2;
+}
+
+.admin-footer{
+    margin-top:auto;
+
+    padding-top:30px;
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    position:relative;
+    z-index:2;
+}
+
+.admin-tag{
+    height:36px;
+    padding:0 14px;
+
+    border-radius:999px;
+
+    background:#EAF4FF;
+
+    color:var(--primary);
+
+    font-size:12px;
+    font-weight:700;
+
+    display:flex;
+    align-items:center;
+}
+
+.admin-arrow{
+    width:52px;
+    height:52px;
+
+    border-radius:18px;
+
+    background:#F1F5F9;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    color:var(--primary);
+
+    font-size:18px;
 }
 
 </style>
 </head>
+
 <body>
 
-<!-- =====================================================
-   APP
-===================================================== -->
+<div class="app-canvas">
 
-<div class="app">
+<!-- HEADER -->
+<header>
 
-  <!-- GRID -->
-
-  <div class="safe-grid"></div>
-
-  <!-- CONTENT -->
-
-  <div class="content">
-
-    <!-- LEFT -->
-
-    <div class="left">
-
-      <div class="logo">
+    <!-- LOGO CLICK -->
+    <div class="logo-text" onclick="navTo('home')">
+        <i class="fas fa-building"></i>
         AENZA
-      </div>
+    </div>
 
-      <h1 class="title">
-        DECLARACIÓN<br>
-        JURADA DE POTENCIAL<br>
-        CONFLICTO DE INTERESES
-      </h1>
+    <div class="user-info">
 
-      <p class="description">
+        <div class="user-name">
+            Mabel Fernanda<br>
+            Vásquez Camacho
+        </div>
 
-        Plataforma corporativa para el registro,
-        validación y gestión de potenciales conflictos
-        de intereses conforme a la normativa vigente.
-
-      </p>
-
-      <!-- BUTTONS -->
-
-      <div class="buttons">
-
-        <button class="btn btn-primary">
-          ▶ Realizar Declaración
-        </button>
-
-        <button class="btn btn-secondary">
-          ⚙ Módulo de Administración
-        </button>
-
-      </div>
+        <div class="avatar">
+            <i class="fas fa-user"></i>
+        </div>
 
     </div>
 
-    <!-- RIGHT -->
+</header>
+    <!-- HOME -->
 
-    <div class="right">
+    <main id="home" class="screen active">
 
-      <!-- CARD -->
+        <div class="home-grid">
 
-      <div class="info-card">
+            <section>
 
-        <div class="icon">
-          📄
+                <h1 class="home-title">
+                    Declaración Jurada de
+                    Conflicto de Intereses
+                </h1>
+
+                <p class="home-desc">
+                    Bienvenido al portal oficial de cumplimiento de
+                    <strong>AENZA</strong>. Registre su declaración para
+                    asegurar la transparencia institucional.
+                </p>
+
+                <div class="home-buttons">
+
+                    <button
+                        class="btn btn-next"
+                        onclick="navTo('statement')"
+                    >
+                        <i class="fas fa-play"></i>
+                        Iniciar proceso
+                    </button>
+
+                    <button
+    class="btn btn-secondary"
+    onclick="navTo('admin')"
+>
+                        <i class="fas fa-cog"></i>
+                        Administración
+                    </button>
+
+                </div>
+
+            </section>
+
+            <section>
+
+                <div class="info-card">
+
+                    <div class="icon-box">
+                        <i class="fas fa-calendar-check"></i>
+                    </div>
+
+                    <div>
+                        <h4>Obligatoriedad</h4>
+
+                        <p>
+                            Todos los colaboradores deben presentar
+                            esta declaración anualmente.
+                        </p>
+                    </div>
+
+                </div>
+
+                <div class="info-card">
+
+                    <div class="icon-box">
+                        <i class="fas fa-exclamation-circle"></i>
+                    </div>
+
+                    <div>
+                        <h4>Plazo de presentación</h4>
+
+                        <p>
+                            El incumplimiento puede generar medidas
+                            administrativas internas.
+                        </p>
+                    </div>
+
+                </div>
+
+                <div class="info-card">
+
+                    <div class="icon-box">
+                        <i class="fas fa-lock"></i>
+                    </div>
+
+                    <div>
+                        <h4>Confidencialidad</h4>
+
+                        <p>
+                            Información utilizada únicamente para fines
+                            de control interno.
+                        </p>
+                    </div>
+
+                </div>
+
+            </section>
+
         </div>
 
-        <div class="card-text">
+    </main>
 
-          <h3>
-            Obligatoriedad
-          </h3>
+    <!-- COMUNICADO -->
 
-          <p>
-            Todos los colaboradores deben presentar
-            esta declaración anualmente.
-          </p>
+    <main id="statement" class="screen">
+
+        <div class="content-card">
+
+            <div class="statement-header">
+
+<div class="statement-icon">
+    <i class="fas fa-shield-alt"></i>
+</div>
+
+                <div class="statement-title">
+                    <h2>Comunicado de Cumplimiento</h2>
+
+                    <p>
+                        Lea cuidadosamente la información antes de continuar
+                    </p>
+                </div>
+
+            </div>
+
+            <div class="legal-box">
+
+                <div class="legal-paragraph">
+
+                    <p>
+                        Como trabajador de una de las empresas que conforman
+                        la Corporación AENZA, declaro haber leído y comprendido
+                        el contenido del
+                        <a href="#" class="legal-link">
+                            Código de Conducta de Negocios
+                        </a>
+                        y de la Política de Conflicto de Interés.
+                    </p>
+
+                    <p>
+                        Asimismo, reconozco que estas disposiciones forman parte
+                        esencial de mis responsabilidades laborales y me
+                        comprometo a cumplirlas durante el desempeño de mis
+                        funciones.
+                    </p>
+
+                    <p>
+                        Entiendo que cualquier incumplimiento podrá generar la
+                        aplicación de medidas disciplinarias conforme a las
+                        políticas internas de la organización.
+                    </p>
+
+                </div>
+
+                <label class="acceptance-box">
+
+                    <input
+                        type="checkbox"
+                        id="legCheck"
+                        onchange="document.getElementById('goNext').disabled = !this.checked"
+                    >
+
+                    <div class="acceptance-content">
+
+                        <strong>
+                            Declaro que la información proporcionada será
+                            verdadera y actualizada.
+                        </strong>
+
+                        <p style="margin-top:8px;">
+                            Me comprometo a informar cualquier modificación en
+                            mi situación declarada dentro de un plazo máximo de
+                            <strong>30 días</strong>.
+                        </p>
+
+                    </div>
+
+                </label>
+
+            </div>
 
         </div>
 
-      </div>
+        <footer>
 
-      <!-- CARD -->
+            <button
+                id="goNext"
+                class="btn btn-next"
+                disabled
+                onclick="navTo('form')"
+            >
+                Continuar
+                <i class="fas fa-arrow-right"></i>
+            </button>
 
-      <div class="info-card">
+        </footer>
 
-        <div class="icon">
-          ⏰
-        </div>
+    </main>
 
-        <div class="card-text">
+    <!-- FORM -->
 
-          <h3>
-            Plazo de Presentación
-          </h3>
+<main id="form" class="screen">
 
-          <p>
-            El incumplimiento puede generar medidas
-            administrativas internas.
-          </p>
+    <div class="content-card" style="max-width:1020px;">
 
-        </div>
+        <div class="form-header">
 
-      </div>
+            <div class="form-icon">
+                <i class="fas fa-id-card"></i>
+            </div>
 
-      <!-- CARD -->
+            <div class="form-title">
 
-      <div class="info-card">
+                <h2>Datos Personales</h2>
 
-        <div class="icon">
-          🔒
-        </div>
+                <p>
+                    Complete la siguiente información obligatoria
+                </p>
 
-        <div class="card-text">
-
-          <h3>
-            Confidencialidad
-          </h3>
-
-          <p>
-            La información registrada será utilizada
-            únicamente para fines de control interno.
-          </p>
+            </div>
 
         </div>
 
-      </div>
+        <div class="form-grid">
+
+            <div class="input-group full">
+
+                <label>
+                    <i class="fas fa-user"></i>
+                    Apellidos y nombres completos
+                </label>
+
+                <input
+                    type="text"
+                    class="input-ctrl"
+                    value="VÁSQUEZ CAMACHO MABEL FERNANDA"
+                >
+
+            </div>
+
+            <div class="input-group">
+
+                <label>
+                    <i class="fas fa-address-card"></i>
+                    Documento de identidad
+                </label>
+
+                <input
+                    type="text"
+                    class="input-ctrl"
+                    value="74706663"
+                >
+
+            </div>
+
+            <div class="input-group">
+
+                <label>
+                    <i class="fas fa-briefcase"></i>
+                    Puesto
+                </label>
+
+                <input
+                    type="text"
+                    class="input-ctrl"
+                    value="Gestor de Proyectos"
+                >
+
+            </div>
+
+            <div class="input-group full">
+
+                <label>
+                    <i class="fas fa-building"></i>
+                    Empresa / Subsidiaria
+                </label>
+
+                <select class="input-ctrl">
+                    <option>OPERSAC</option>
+                    <option>AENZA Corporativo</option>
+                </select>
+
+            </div>
+
+        </div>
 
     </div>
 
-  </div>
+    <footer>
+
+<button class="btn btn-next" onclick="navTo('question4')">
+    Siguiente sección
+    <i class="fas fa-chevron-right"></i>
+</button>
+
+    </footer>
+
+</main>
+
+
+
+<!-- PANTALLA 4 -->
+
+<main id="question4" class="screen"
+style="
+flex-direction:column;
+flex:1;
+background:#f7faff;
+">
+
+    <div class="content"
+    style="
+    flex:1;
+    padding:14px 20px;
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+    overflow:hidden;
+    ">
+
+        <!-- TOP PANEL -->
+
+        <div class="panel">
+
+            <div class="top-header">
+
+                <div class="panel-title">
+                    Preguntas de Validación
+                </div>
+
+                <div class="status-badge">
+
+                    <i class="fas fa-circle-check"></i>
+
+                    Progreso 1 de 11
+
+                </div>
+
+            </div>
+
+            <!-- STEPS -->
+
+            <div class="step-grid">
+
+                <button
+                id="step1"
+                class="step-btn active-step">
+
+                    P1
+
+                </button>
+
+                <button class="step-btn">P2</button>
+                <button class="step-btn">P3</button>
+                <button class="step-btn">P4</button>
+                <button class="step-btn">P5</button>
+                <button class="step-btn">P6</button>
+                <button class="step-btn">P7</button>
+                <button class="step-btn">P8</button>
+                <button class="step-btn">P9</button>
+                <button class="step-btn">P10</button>
+                <button class="step-btn">P11</button>
+
+            </div>
+
+        </div>
+
+        <!-- QUESTION -->
+
+        <div class="panel">
+
+            <div class="question-title">
+
+                ¿Labora algún familiar directo suyo dentro de alguna de las empresas que conforman AENZA?
+
+            </div>
+
+            <div class="question-description">
+
+                Para responder tenga en consideración que un familiar directo incluye:
+                cónyuge, padres, hijos, hermanos, suegros, sobrinos y cuñados(as).
+
+            </div>
+
+            <!-- OPTIONS -->
+
+            <div class="options">
+
+                <label class="option-card">
+
+                    <input type="radio"
+                    name="familyQuestion"
+                    onchange="showFamilySection()">
+
+                    SI
+
+                </label>
+
+                <label class="option-card">
+
+                    <input type="radio"
+                    name="familyQuestion"
+                    onchange="completeQuestion()">
+
+                    NO
+
+                </label>
+
+            </div>
+
+        </div>
+
+        <!-- FAMILY SECTION -->
+
+        <div id="familySection"
+        class="family-section">
+
+            <div class="family-top">
+
+                <div class="family-tabs">
+
+                    <button class="family-tab active-tab">
+                        Familiar 1
+                    </button>
+
+                    <button class="family-tab">
+                        Familiar 2
+                    </button>
+
+                    <button class="family-tab">
+                        Familiar 3
+                    </button>
+
+                </div>
+
+                <button class="save-btn"
+                onclick="completeQuestion()">
+
+                    <i class="fas fa-save"></i>
+
+                    Guardar
+
+                </button>
+
+            </div>
+
+            <div class="family-form">
+
+                <div class="field-box">
+
+                    <label>
+                        Nombre del familiar
+                    </label>
+
+                    <input type="text"
+                    placeholder="Ingrese información">
+
+                </div>
+
+                <div class="field-box">
+
+                    <label>
+                        Parentesco
+                    </label>
+
+                    <input type="text"
+                    placeholder="Ingrese información">
+
+                </div>
+
+                <div class="field-box">
+
+                    <label>
+                        Empresa
+                    </label>
+
+                    <input type="text"
+                    placeholder="Ingrese información">
+
+                </div>
+
+                <div class="field-box">
+
+                    <label>
+                        Cargo
+                    </label>
+
+                    <input type="text"
+                    placeholder="Ingrese información">
+
+                </div>
+
+                <div class="field-box">
+
+                    <label>
+                        Área / Proyecto
+                    </label>
+
+                    <input type="text"
+                    placeholder="Ingrese información">
+
+                </div>
+
+                <div class="field-box">
+
+                    <label>
+                        Tiempo laborando
+                    </label>
+
+                    <input type="text"
+                    placeholder="Ingrese información">
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- FOOTER -->
+
+    <footer>
+
+        <div class="navigation">
+
+            <button class="nav-btn nav-back"
+            onclick="navTo('form')">
+
+                <i class="fas fa-arrow-left"></i>
+
+                Regresar
+
+            </button>
+
+            <div class="page-indicator">
+
+                Pregunta 1 de 11
+
+            </div>
+
+            <button class="nav-btn nav-next">
+
+                Continuar
+
+                <i class="fas fa-arrow-right"></i>
+
+            </button>
+
+        </div>
+    </footer>
+
+</main>
+
+<!-- =========================
+ADMIN SCREEN
+========================= -->
+
+<main id="admin" class="screen">
+
+    <div class="admin-wrapper">
+
+        <!-- TOPBAR -->
+
+        <div class="admin-top">
+
+            <div>
+
+                <h1 class="admin-title">
+                    Administración
+                </h1>
+
+                <p class="admin-subtitle">
+                    Acceda rápidamente a los módulos administrativos
+                    del sistema corporativo.
+                </p>
+
+            </div>
+
+            <button
+                class="admin-home"
+                onclick="navTo('home')"
+            >
+                <i class="fas fa-house"></i>
+            </button>
+
+        </div>
+
+        <!-- MODULES -->
+
+        <div class="admin-grid">
+
+            <!-- PREGUNTAS -->
+
+<button
+class="admin-card"
+onclick="navTo('builder')">
+
+                <div class="admin-icon">
+                    <i class="fas fa-circle-question"></i>
+                </div>
+
+                <h2>Preguntas</h2>
+
+                <p>
+                    Configure preguntas, subpreguntas y estructuras
+                    dinámicas del formulario de declaración jurada.
+                </p>
+
+                <div class="admin-footer">
+
+                    <div class="admin-tag">
+                        Configuración
+                    </div>
+
+                    <div class="admin-arrow">
+                        <i class="fas fa-arrow-right"></i>
+                    </div>
+
+                </div>
+
+            </button>
+
+            <!-- ACCESOS -->
+
+<!-- ACCESOS -->
+
+<!-- ACCESOS -->
+
+<button
+class="admin-card"
+onclick="navTo('access')">
+
+    <div class="admin-icon">
+        <i class="fas fa-user-shield"></i>
+    </div>
+
+    <h2>Accesos</h2>
+
+    <p>
+        Gestión de usuarios, permisos y accesos
+        administrativos dentro de la plataforma.
+    </p>
+
+    <div class="admin-footer">
+
+        <div class="admin-tag">
+            Seguridad
+        </div>
+
+        <div class="admin-arrow">
+            <i class="fas fa-arrow-right"></i>
+        </div>
+
+    </div>
+
+</button>
+
+            <!-- REPORTES -->
+
+            <button class="admin-card">
+
+                <div class="admin-icon">
+                    <i class="fas fa-chart-column"></i>
+                </div>
+
+                <h2>Reportes</h2>
+
+                <p>
+                    Visualice métricas, estadísticas y dashboards
+                    interactivos relacionados al cumplimiento.
+                </p>
+
+                <div class="admin-footer">
+
+                    <div class="admin-tag">
+                        Power BI
+                    </div>
+
+                    <div class="admin-arrow">
+                        <i class="fas fa-arrow-right"></i>
+                    </div>
+
+                </div>
+
+            </button>
+
+        </div>
+
+    </div>
+
+</main>
+
+<!-- =========================
+BUILDER SCREEN
+========================= -->
+
+<main id="builder" class="screen">
+
+<div style="
+width:100%;
+height:100%;
+display:flex;
+flex-direction:column;
+overflow:hidden;
+">
+
+    <!-- BUILDER HEADER -->
+
+    <div style="
+    height:70px;
+    min-height:70px;
+
+    background:white;
+
+    border:1px solid #e2e8f0;
+
+    border-radius:20px;
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    padding:0 24px;
+
+    margin-bottom:18px;
+    ">
+
+        <div style="
+        display:flex;
+        align-items:center;
+        gap:14px;
+        ">
+
+            <div style="
+            width:48px;
+            height:48px;
+
+            border-radius:14px;
+
+            background:linear-gradient(
+                135deg,
+                #0066D9,
+                #4EA7FF
+            );
+
+            display:flex;
+            align-items:center;
+            justify-content:center;
+
+            color:white;
+            font-size:20px;
+            ">
+
+                <i class="fas fa-circle-question"></i>
+
+            </div>
+
+            <div>
+
+                <div style="
+                font-size:20px;
+                font-weight:800;
+                color:#0f172a;
+                ">
+
+                    Builder de Preguntas
+
+                </div>
+
+                <div style="
+                font-size:12px;
+                color:#64748b;
+                ">
+
+                    Configuración dinámica del formulario
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <button
+        onclick="navTo('admin')"
+        class="btn btn-secondary">
+
+            <i class="fas fa-arrow-left"></i>
+            Regresar
+
+        </button>
+
+    </div>
+
+    <!-- BUILDER BODY -->
+
+    <div style="
+    flex:1;
+
+    display:grid;
+
+    grid-template-columns:
+        260px
+        1fr
+        360px;
+
+    gap:16px;
+
+    overflow:hidden;
+    ">
+
+        <!-- LEFT -->
+
+        <div style="
+        background:white;
+        border-radius:22px;
+        border:1px solid #e2e8f0;
+
+        display:flex;
+        flex-direction:column;
+
+        overflow:hidden;
+        ">
+
+            <div style="
+            height:70px;
+            min-height:70px;
+
+            border-bottom:1px solid #e2e8f0;
+
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+
+            padding:0 18px;
+            ">
+
+                <div>
+
+                    <div style="
+                    font-size:18px;
+                    font-weight:800;
+                    color:#0f172a;
+                    ">
+
+                        Preguntas
+
+                    </div>
+
+                    <div style="
+                    font-size:12px;
+                    color:#64748b;
+                    ">
+
+                        11 configuradas
+
+                    </div>
+
+                </div>
+
+                <button style="
+                width:40px;
+                height:40px;
+
+                border:none;
+                border-radius:12px;
+
+                background:#0078d4;
+                color:white;
+
+                cursor:pointer;
+                ">
+
+                    <i class="fas fa-plus"></i>
+
+                </button>
+
+            </div>
+
+            <!-- QUESTIONS -->
+
+            <div style="
+            flex:1;
+
+            overflow:auto;
+
+            padding:14px;
+            ">
+
+                <div id="questionListBuilder"></div>
+
+            </div>
+
+        </div>
+
+        <!-- CENTER -->
+
+        <div style="
+        background:white;
+        border-radius:22px;
+        border:1px solid #e2e8f0;
+
+        overflow:auto;
+        ">
+
+            <div style="
+            padding:22px;
+
+            border-bottom:1px solid #e2e8f0;
+
+            display:flex;
+            align-items:flex-start;
+            justify-content:space-between;
+            ">
+
+                <div style="
+                display:flex;
+                gap:14px;
+                ">
+
+                    <div style="
+                    width:60px;
+                    height:60px;
+
+                    border-radius:18px;
+
+                    background:linear-gradient(
+                        135deg,
+                        #0066D9,
+                        #4EA7FF
+                    );
+
+                    display:flex;
+                    align-items:center;
+                    justify-content:center;
+
+                    color:white;
+                    font-size:22px;
+                    ">
+
+                        <i class="fas fa-circle-question"></i>
+
+                    </div>
+
+                    <div>
+
+                        <div id="previewTitle"
+                        style="
+                        font-size:24px;
+                        font-weight:800;
+                        color:#0f172a;
+                        margin-bottom:6px;
+                        ">
+                        </div>
+
+                        <div id="previewDescription"
+                        style="
+                        font-size:13px;
+                        color:#64748b;
+                        line-height:1.7;
+                        max-width:500px;
+                        ">
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div style="
+                height:34px;
+                padding:0 14px;
+
+                border-radius:999px;
+
+                background:#EAF4FF;
+
+                color:#0078d4;
+
+                display:flex;
+                align-items:center;
+
+                font-size:11px;
+                font-weight:700;
+                ">
+
+                    Activa
+
+                </div>
+
+            </div>
+
+            <div style="padding:20px;">
+
+                <!-- OPTIONS -->
+
+                <div style="margin-bottom:24px;">
+
+                    <div style="
+                    font-size:14px;
+                    font-weight:700;
+                    margin-bottom:12px;
+                    ">
+
+                        Opciones
+
+                    </div>
+
+                    <div id="previewOptions"
+                    style="
+                    display:flex;
+                    gap:10px;
+                    flex-wrap:wrap;
+                    ">
+                    </div>
+
+                </div>
+
+                <!-- SUBQUESTIONS -->
+
+                <div style="margin-bottom:24px;">
+
+                    <div style="
+                    font-size:14px;
+                    font-weight:700;
+                    margin-bottom:12px;
+                    ">
+
+                        Subpreguntas
+
+                    </div>
+
+                    <div id="previewTabs"
+                    style="
+                    display:flex;
+                    gap:10px;
+                    flex-wrap:wrap;
+                    ">
+                    </div>
+
+                </div>
+
+                <!-- FIELDS -->
+
+                <div>
+
+                    <div style="
+                    font-size:14px;
+                    font-weight:700;
+                    margin-bottom:12px;
+                    ">
+
+                        Campos
+
+                    </div>
+
+                    <div id="previewFields"
+                    style="
+                    display:grid;
+                    grid-template-columns:1fr 1fr;
+                    gap:12px;
+                    ">
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- RIGHT -->
+
+        <div style="
+        background:white;
+        border-radius:22px;
+        border:1px solid #e2e8f0;
+
+        display:flex;
+        flex-direction:column;
+
+        overflow:hidden;
+        ">
+
+            <div style="
+            height:70px;
+
+            border-bottom:1px solid #e2e8f0;
+
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+
+            padding:0 18px;
+            ">
+
+                <div style="
+                font-size:18px;
+                font-weight:800;
+                ">
+
+                    Editor
+
+                </div>
+
+                <button class="btn btn-next">
+
+                    Guardar
+
+                </button>
+
+            </div>
+
+            <div style="
+            flex:1;
+
+            overflow:auto;
+
+            padding:16px;
+            ">
+
+                <div style="margin-bottom:18px;">
+
+                    <label style="
+                    display:block;
+                    margin-bottom:8px;
+
+                    font-size:13px;
+                    font-weight:700;
+                    ">
+
+                        Pregunta
+
+                    </label>
+
+                    <textarea
+                    id="questionInput"
+                    style="
+                    width:100%;
+                    height:100px;
+
+                    border:1px solid #e2e8f0;
+
+                    border-radius:14px;
+
+                    padding:12px;
+
+                    resize:none;
+                    "></textarea>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
 
 </div>
+
+</main>
+
+<!-- =========================================
+ACCESS SCREEN
+========================================= -->
+
+<main id="access" class="screen">
+
+<div style="
+width:100%;
+height:100%;
+
+display:flex;
+flex-direction:column;
+">
+
+    <!-- BODY -->
+
+    <div style="
+    flex:1;
+
+    padding:14px;
+
+    display:grid;
+
+    grid-template-columns:
+        300px
+        1fr;
+
+    gap:14px;
+
+    overflow:hidden;
+    ">
+
+        <!-- LEFT PANEL -->
+
+        <div style="
+        background:white;
+
+        border:1px solid #E2E8F0;
+
+        border-radius:18px;
+
+        overflow:hidden;
+
+        display:flex;
+        flex-direction:column;
+        ">
+
+            <!-- TOP -->
+
+            <div style="
+            height:62px;
+
+            border-bottom:1px solid #E2E8F0;
+
+            display:flex;
+            align-items:center;
+
+            padding:0 16px;
+            ">
+
+                <div>
+
+                    <div style="
+                    font-size:15px;
+                    font-weight:800;
+                    color:#0F172A;
+                    ">
+
+                        Agregar Usuario
+
+                    </div>
+
+                    <div style="
+                    font-size:11px;
+                    color:#64748B;
+                    ">
+
+                        Nuevo acceso
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- BODY -->
+
+            <div style="
+            flex:1;
+
+            padding:16px;
+            ">
+
+                <label style="
+                display:block;
+
+                margin-bottom:8px;
+
+                font-size:12px;
+                font-weight:700;
+                ">
+
+                    Usuario
+
+                </label>
+
+                <div style="
+                position:relative;
+                ">
+
+                    <i class="fas fa-user"
+                    style="
+                    position:absolute;
+
+                    left:14px;
+                    top:16px;
+
+                    color:#94A3B8;
+
+                    font-size:12px;
+                    "></i>
+
+                    <select style="
+                    width:100%;
+                    height:46px;
+
+                    border:1px solid #E2E8F0;
+
+                    border-radius:14px;
+
+                    background:#F8FAFC;
+
+                    padding-left:40px;
+
+                    font-size:13px;
+                    ">
+
+                        <option>
+                            Seleccionar usuario
+                        </option>
+
+                        <option>
+                            Mabel Vásquez
+                        </option>
+
+                        <option>
+                            Herberth Miranda
+                        </option>
+
+                    </select>
+
+                </div>
+
+            </div>
+
+            <!-- FOOTER -->
+
+            <div style="
+            height:68px;
+
+            border-top:1px solid #E2E8F0;
+
+            display:flex;
+            justify-content:flex-end;
+            align-items:center;
+
+            padding:0 16px;
+            ">
+
+                <button style="
+                height:42px;
+
+                border:none;
+
+                border-radius:14px;
+
+                background:#0078D4;
+
+                color:white;
+
+                padding:0 18px;
+
+                display:flex;
+                align-items:center;
+                gap:8px;
+
+                font-size:12px;
+                font-weight:700;
+
+                cursor:pointer;
+                ">
+
+                    <i class="fas fa-save"></i>
+
+                    Guardar
+
+                </button>
+
+            </div>
+
+        </div>
+
+        <!-- RIGHT PANEL -->
+
+        <div style="
+        background:white;
+
+        border:1px solid #E2E8F0;
+
+        border-radius:18px;
+
+        overflow:hidden;
+
+        display:flex;
+        flex-direction:column;
+        ">
+
+            <!-- HEADER -->
+
+            <div style="
+            height:62px;
+
+            border-bottom:1px solid #E2E8F0;
+
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+
+            padding:0 16px;
+            ">
+
+                <div>
+
+                    <div style="
+                    font-size:15px;
+                    font-weight:800;
+                    color:#0F172A;
+                    ">
+
+                        Usuarios Registrados
+
+                    </div>
+
+                    <div style="
+                    font-size:11px;
+                    color:#64748B;
+                    ">
+
+                        Accesos habilitados
+
+                    </div>
+
+                </div>
+
+                <!-- SEARCH -->
+
+                <div style="
+                position:relative;
+                ">
+
+                    <i class="fas fa-search"
+                    style="
+                    position:absolute;
+
+                    left:14px;
+                    top:13px;
+
+                    color:#94A3B8;
+
+                    font-size:12px;
+                    "></i>
+
+                    <input
+                    type="text"
+                    placeholder="Buscar..."
+                    style="
+                    width:210px;
+                    height:40px;
+
+                    border:1px solid #E2E8F0;
+
+                    border-radius:12px;
+
+                    background:#F8FAFC;
+
+                    padding-left:38px;
+
+                    font-size:12px;
+                    ">
+
+                </div>
+
+            </div>
+
+            <!-- LIST -->
+
+            <div style="
+            flex:1;
+
+            overflow:auto;
+
+            padding:14px;
+            ">
+
+                <!-- CARD -->
+
+                <div style="
+                background:#F8FAFC;
+
+                border:1px solid #E2E8F0;
+
+                border-radius:16px;
+
+                padding:14px;
+
+                display:flex;
+                justify-content:space-between;
+                align-items:center;
+
+                margin-bottom:10px;
+                ">
+
+                    <div style="
+                    display:flex;
+                    align-items:center;
+                    gap:12px;
+                    ">
+
+                        <div style="
+                        width:46px;
+                        height:46px;
+
+                        border-radius:14px;
+
+                        background:#EAF4FF;
+
+                        display:flex;
+                        align-items:center;
+                        justify-content:center;
+
+                        color:#0078D4;
+
+                        font-size:16px;
+                        ">
+
+                            <i class="fas fa-user"></i>
+
+                        </div>
+
+                        <div>
+
+                            <div style="
+                            font-size:13px;
+                            font-weight:800;
+                            color:#0F172A;
+
+                            margin-bottom:4px;
+                            ">
+
+                                Herberth Miranda
+
+                            </div>
+
+                            <div style="
+                            font-size:11px;
+                            color:#64748B;
+                            ">
+
+                                Administrador habilitado
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <button style="
+                    width:40px;
+                    height:40px;
+
+                    border:none;
+
+                    border-radius:12px;
+
+                    background:#FFECEC;
+
+                    color:#DC2626;
+
+                    cursor:pointer;
+                    ">
+
+                        <i class="fas fa-trash"></i>
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+</main>
+
+<script>
+
+function navTo(id){
+
+    document
+        .querySelectorAll('.screen')
+        .forEach(screen => screen.classList.remove('active'));
+
+    document
+        .getElementById(id)
+        .classList.add('active');
+}
+
+function showFamilySection(){
+
+    document.getElementById('familySection').style.display='flex';
+}
+
+function completeQuestion(){
+
+    const step1 =
+    document.getElementById('step1');
+
+    step1.classList.remove('active-step');
+
+    step1.classList.add('completed-step');
+
+    document.getElementById('familySection').style.display='none';
+}
+
+/* =========================
+BUILDER
+========================= */
+
+const builderQuestions = [];
+
+for(let i=1;i<=11;i++){
+
+    builderQuestions.push({
+
+        id:i,
+
+        title:`Pregunta ${i}`,
+
+        description:`Contenido editable de la pregunta ${i}.`,
+
+        options:["SI","NO"],
+
+        tabs:[
+            "Familiar 1",
+            "Familiar 2"
+        ],
+
+        fields:[
+            {
+                label:"Nombre completo",
+                type:"text"
+            },
+            {
+                label:"Empresa",
+                type:"text"
+            }
+        ]
+    });
+}
+
+function renderBuilder(){
+
+    const list =
+    document.getElementById(
+        'questionListBuilder'
+    );
+
+    if(!list) return;
+
+    list.innerHTML='';
+
+    builderQuestions.forEach((q,index)=>{
+
+        list.innerHTML += `
+
+        <div
+        onclick="selectBuilderQuestion(${index})"
+        style="
+        background:#F8FAFC;
+
+        border:1px solid #e2e8f0;
+
+        border-radius:16px;
+
+        padding:14px;
+
+        margin-bottom:10px;
+
+        cursor:pointer;
+        ">
+
+            <div style="
+            font-size:11px;
+            font-weight:700;
+            color:#0078d4;
+
+            margin-bottom:5px;
+            ">
+
+                Pregunta ${q.id}
+
+            </div>
+
+            <div style="
+            font-size:13px;
+            line-height:1.5;
+            ">
+
+                ${q.title}
+
+            </div>
+
+        </div>
+
+        `;
+    });
+
+    selectBuilderQuestion(0);
+}
+
+function selectBuilderQuestion(index){
+
+    const q = builderQuestions[index];
+
+    document.getElementById(
+        'previewTitle'
+    ).innerText = q.title;
+
+    document.getElementById(
+        'previewDescription'
+    ).innerText = q.description;
+
+    document.getElementById(
+        'questionInput'
+    ).value = q.title;
+
+    /* OPTIONS */
+
+    let optionsHTML='';
+
+    q.options.forEach(option=>{
+
+        optionsHTML += `
+
+        <div style="
+        min-width:110px;
+        height:44px;
+
+        border-radius:14px;
+
+        background:#F8FAFC;
+
+        border:1px solid #e2e8f0;
+
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        gap:8px;
+
+        font-size:13px;
+        font-weight:700;
+        ">
+
+            <input type="radio">
+
+            ${option}
+
+        </div>
+
+        `;
+    });
+
+    document.getElementById(
+        'previewOptions'
+    ).innerHTML = optionsHTML;
+
+    /* TABS */
+
+    let tabsHTML='';
+
+    q.tabs.forEach((tab,index)=>{
+
+        tabsHTML += `
+
+        <button style="
+        height:36px;
+        padding:0 16px;
+
+        border:none;
+        border-radius:12px;
+
+        background:
+        ${index===0 ? '#0078d4' : '#E2E8F0'};
+
+        color:
+        ${index===0 ? 'white' : '#334155'};
+
+        font-size:12px;
+        font-weight:700;
+        ">
+
+            ${tab}
+
+        </button>
+
+        `;
+    });
+
+    document.getElementById(
+        'previewTabs'
+    ).innerHTML = tabsHTML;
+
+    /* FIELDS */
+
+    let fieldsHTML='';
+
+    q.fields.forEach(field=>{
+
+        fieldsHTML += `
+
+        <div style="
+        min-height:54px;
+
+        border-radius:14px;
+
+        background:#F8FAFC;
+
+        border:1px solid #e2e8f0;
+
+        display:flex;
+        align-items:center;
+
+        padding:12px;
+
+        font-size:13px;
+        font-weight:700;
+        ">
+
+            ${field.label}
+
+            <span style="
+            margin-left:auto;
+
+            font-size:11px;
+            color:#64748b;
+            ">
+
+                ${field.type}
+
+            </span>
+
+        </div>
+
+        `;
+    });
+
+    document.getElementById(
+        'previewFields'
+    ).innerHTML = fieldsHTML;
+}
+
+renderBuilder();
+
+</script>
 
 </body>
 </html>
